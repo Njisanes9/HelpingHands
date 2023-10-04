@@ -1,0 +1,142 @@
+﻿@model List<HelpingHands.Models.ChronicCondition>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+
+        .center table {
+            padding: 0 40px;
+            box-sizing: border-box;
+        }
+
+        .center h2 {
+            text-align: center;
+            position: absolute;
+            top: 20%;
+            left: 40%;
+            font-weight: bold;
+        }
+
+        .button-container {
+            display: flex;
+            position: absolute;
+            top: 25%;
+            left: 13%;
+        }
+
+            .button-container .btn-spaced {
+                margin-left: 10px;
+            }
+
+        .content-table {
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #ffffff;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            min-width: 1400px;
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.15);
+            align-content: center;
+        }
+
+            .content-table thead tr {
+                background-color: lightblue;
+                color: #ffffff;
+                text-align: left;
+                font-weight: bold;
+            }
+
+            .content-table th,
+            .content-table td {
+                padding: 12px 15px;
+            }
+
+            .content-table tbody tr {
+                border-bottom: 1px solid #dddddd;
+            }
+
+                .content-table tbody tr:nth-of-type(even) {
+                    background-color: #f3f3f3;
+                }
+
+                .content-table tbody tr:last-of-type {
+                    border-bottom: 2px #009879;
+                }
+
+                .content-table tbody tr .active-row {
+                    font-weight: bold;
+                    color: #009879;
+                }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+    <div class="center">
+
+        <h2><i class='fas fa-city'></i>&nbsp Chronic Conditions</h2>
+        <hr>
+        <div class="button-container">
+            <a asp-action="Create" asp-controller="Condition" class="btn btn-primary"><i class="fas fa-plus"></i>New Condition</a>
+            
+        </div>
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>Condition Name</th>
+                    <th>Condition Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var condition in Model)
+                    {
+                        <tr>
+                            <td>@condition.ConditionName</td>
+                            <td>@condition.ConditionDescr</td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <a asp-action="Edit" asp-controller="City" asp-route-id="@condition.ConditionId" class="btn btn-primary">Edit</a>
+                                    &nbsp
+                                    <a asp-action="Delete" asp-controller="City" asp-route-id="@condition.ConditionId" class="btn btn-danger">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="2">
+                            <div>No records available!</div>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

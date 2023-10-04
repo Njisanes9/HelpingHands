@@ -1,0 +1,46 @@
+﻿@model HelpingHands.Models.User
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Patient Registration</title>
+	<link rel="stylesheet" href="~/css/AccountStyle.css" />
+</head>
+<body>
+	<div class="center">
+		<h1>Patient Registration</h1>
+		<form method="post" enctype="multipart/form-data" action="Register">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="txt_field">
+				<input type="text" autocapitalize="off" asp-for="UserName" class="form-control" autocomplete="off" />
+				<span asp-validation-for="UserName" class="text-danger"></span>
+				<label class="required">Username</label>
+			</div>
+			<div class="txt_field">
+				<input type="email" autocapitalize="off" asp-for="Email" class="form-control" autocomplete="off" />
+				<span asp-validation-for="Email" class="text-danger"></span>
+				<label class="required">Email</label>
+			</div>
+			<div class="txt_field">
+				<input type="number" autocapitalize="off" asp-for="ContactNumber" class="form-control" autocomplete="off" />
+				<span asp-validation-for="ContactNumber" class="text-danger"></span>
+				<label class="required">Contact Number</label>
+			</div>
+			<div class="txt_field">
+				<input type="password" autocapitalize="off" class="form-control" asp-for="Password" />
+				<span asp-validation-for="Password" class="text-danger"></span>
+				<label class="required">Password</label>
+			</div>
+			@*<div class="pass">Forgot Password?</div>*@
+			<input type="submit" value="Register" />
+			<div class="signup_link">
+				Already have an account?
+				<a asp-controller="User" asp-action="Login">Login</a>
+			</div>
+		</form>
+	</div>
+
+
+</body>
+</html>

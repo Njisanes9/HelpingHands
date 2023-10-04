@@ -1,0 +1,230 @@
+﻿@{
+	Layout = "/Views/Shared/_LayoutNurse.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="~/css/dashboardstyle.css">
+
+	<title>Nurse</title>
+	<meta name="viewport" content="width=device-width" />
+	<title>@ViewBag.Title</title>
+</head>
+<body>
+	<div class="container">
+		<section id="content">
+
+			<main>
+				<div class="head-title">
+					<div class="left">
+						<h1>Dashboard</h1>
+						<ul class="breadcrumb">
+							<li>
+								<a href="#">DorDan</a>
+							</li>
+						
+						</ul>
+					</div>
+					
+				</div>
+
+				<ul class="box-info">
+					<li>
+						<i class='bx bxs-edit'></i>
+						<span class="text">
+							<h3>New Contracts</h3>
+							<p>4</p>
+						</span>
+					</li>
+					<li>
+						<i class='bx bxs-group'></i>
+						<span class="text">
+							<h3>Care Visits</h3>
+							<p>4</p>
+						</span>
+					</li>
+					<li>
+						<i class='bx bxs-receipt'></i>
+						<span class="text">
+							<h3>My Contracts</h3>
+							<p>4</p>
+						</span>
+					</li>
+					
+					
+				</ul>
+				<ul class="box-info">
+					<li>
+						<i class='bx bxs-calendar'></i>
+						<span class="text">
+							<h3>Scheduling</h3>
+							<p></p>
+						</span>
+					</li>
+					<li>
+						<i class='bx bx-calendar-heart'></i>
+						<span class="text">
+							<h3>Care Plan</h3>
+							
+						</span>
+					</li>
+					<li>
+						<i class='bx bx-clipboard'></i>
+						<span class="text">
+							<h3>Reports</h3>
+
+						</span>
+					</li>
+					
+
+				</ul>
+
+				<div class="table-data">
+					<div class="order">
+						<div class="head">
+							<h3>Contracts By Suburb</h3>
+							<i class='bx bx-search'></i>
+							<i class='bx bx-filter'></i>
+						</div>
+						<table>
+							<thead>
+								<tr>
+									<th>Firstname</th>
+									<th>Surname</th>
+									<th>Gender</th>
+									<th>Date Of Birth</th>
+									<th>Emergency Contact</th>
+									<th>Emergency Number</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										
+										<p>Carlos</p>
+									</td>
+									<td>
+										<p>Andrade</p>
+									</td>
+									<td>
+										<p>M</p>
+									</td>
+									<td>
+										<p>1955-10-08</p>
+									</td>
+									<td>
+										Elzunia Andrade
+									</td>
+									<td>
+										0732458796
+									</td>
+									
+								</tr>
+								<tr>
+									<td>
+
+										<p>Kabelo</p>
+									</td>
+									<td>
+										<p>Padi</p>
+									</td>
+									<td>
+										<p>M</p>
+									</td>
+									<td>
+										<p>1971-12-15</p>
+									</td>
+									<td>
+										<p>Sipho Kuhle</p>
+									</td>
+									<td>
+										<p>0712458796</p>
+									</td>
+									
+								</tr>
+								<tr>
+									<td>
+
+										<p>Pulane</p>
+									</td>
+									<td>
+										<p>Masemola</p>
+									</td>
+									<td>
+										<p>F</p>
+									</td>
+									<td>
+										<p>1991-10-12</p>
+									</td>
+									<td>
+										<p>Mandisa Bala</p>
+									</td>
+									<td>
+										<p>0632458796</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+
+										<p>Melanie</p>
+									</td>
+									<td>
+										<p>Mack</p>
+									</td>
+									<td>
+										<p>F</p>
+									</td>
+									<td>
+										<p>1960-08-10</p>
+									</td>
+									<td>
+										<p>Kevin Mack</p>
+									</td>
+									<td>
+										<p>0822458796</p>
+									</td>
+								</tr>
+								
+							</tbody>
+						</table>
+					</div>
+					<div class="todo">
+						<div class="head">
+							<h3>Visit Locations</h3>
+							<i class='bx bx-plus'></i>
+							<i class='bx bx-filter'></i>
+						</div>
+						<ul class="todo-list">
+							<li class="completed">
+								<p>Summerstrand</p>
+								<i class='bx bx-dots-vertical-rounded'></i>
+							</li>
+							<li class="completed">
+								<p>Humewood</p>
+								<i class='bx bx-dots-vertical-rounded'></i>
+							</li>
+							
+							
+							
+						</ul>
+					</div>
+				</div>
+			</main>
+			
+		</section>
+		
+	</div>
+	<script src="~/js/Dashboardscript.js"></script>
+</body>
+</html>
+
+
+
+
+
+

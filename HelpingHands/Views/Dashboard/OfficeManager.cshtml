@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewData["Title"] = "OfficeManager";
+    Layout = "~/Views/Shared/_LayoutOfficeManager.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="~/css/dashboardstyle.css">
+
+	<title>Office Manager</title>
+	<meta name="viewport" content="width=device-width" />
+	<title>@ViewBag.Title</title>
+</head>
+<body>
+	<div class="container">
+		<section id="content">
+
+			<main>
+				<div class="head-title">
+					<div class="left">
+						<h1>Dashboard</h1>
+						<ul class="breadcrumb">
+							<li>
+								<a href="#">Office Manager</a>
+							</li>
+
+						</ul>
+					</div>
+
+				</div>
+
+				<ul class="box-info">
+					<li>
+						<i class='bx bxs-receipt'></i>
+						<span class="text">
+							<h3>Manage Contracts</h3>
+							
+						</span>
+					</li>
+					<li>
+						<i class='bx bxs-group'></i>
+						
+						<span class="text">
+							<h3>Manage Visits</h3>
+							
+						</span>
+					</li>
+					<li>
+						<i class='bx bx-clipboard'></i>
+						<span class="text">
+							<h3>Reports</h3>
+							
+						</span>
+					</li>
+					
+				</ul>
+
+
+				<div class="table-data">
+					<div class="order">
+						<div class="head">
+							<h3>Un-Assigned Nurses</h3>
+							<i class='bx bx-search'></i>
+							<i class='bx bx-filter'></i>
+						</div>
+						<table>
+							<thead>
+								<tr>
+									<th>Firstname</th>
+									<th>Surname</th>
+									<th>Gender</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+
+										<p>Vanessa</p>
+									</td>
+									<td>
+										<p>Meintjies</p>
+									</td>
+									<td>
+										<p>F</p>
+									</td>
+									
+
+								</tr>
+								<tr>
+									<td>
+
+										<p>Lesedi</p>
+									</td>
+									<td>
+										<p>Moloi</p>
+									</td>
+									<td>
+										<p>F</p>
+									</td>
+									
+
+								</tr>
+								
+							</tbody>
+						</table>
+					</div>
+					
+				</div>
+			</main>
+
+		</section>
+
+	</div>
+	<script src="~/js/Dashboardscript.js"></script>
+</body>
+</html>

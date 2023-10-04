@@ -1,0 +1,260 @@
+﻿/* Reset some default styles */
+body, h1, h2, h3, p, ul, li, form {
+    margin: 0;
+    padding: 0;
+}
+
+/* Apply a background image or color to the body */
+body {
+    background: url(/css/logo.jpeg) no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+}
+
+/* Container for page content */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header styles */
+header {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px 0;
+}
+
+    header h1 {
+        font-size: 36px;
+        color: #333;
+    }
+
+nav ul {
+    list-style: none;
+}
+
+    nav ul li {
+        display: inline;
+        margin-right: 20px;
+    }
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Hero section styles */
+.hero {
+    text-align: center;
+    padding: 100px 0;
+    background: url(/css/backpic1.jpg) no-repeat center center fixed;
+}
+
+    .hero h2 {
+        font-size: 48px;
+        color: black;
+    }
+
+    .hero p {
+        font-size: 18px;
+        color: black;
+        margin-top: 20px;
+    }
+
+/* Button styles */
+.btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* Services section styles */
+.services {
+    background-color: #f9f9f9;
+    padding: 80px 0;
+    text-align: center;
+}
+
+    .services h2 {
+        font-size: 36px;
+        color: #333;
+    }
+
+.service-card {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+    .service-card img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .service-card h3 {
+        font-size: 24px;
+        margin-top: 10px;
+        color: #333;
+    }
+
+    .service-card p {
+        font-size: 16px;
+        color: #666;
+        margin-top: 10px;
+    }
+
+/* About section styles */
+.about {
+    padding: 80px 0;
+    text-align: center;
+    background-color: #fff;
+}
+
+    .about h2 {
+        font-size: 36px;
+        color: #333;
+    }
+
+    .about p {
+        font-size: 18px;
+        color: #666;
+        margin-top: 20px;
+    }
+
+/* Contact section styles */
+.contact {
+    padding: 80px 0;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+    .contact h2 {
+        font-size: 36px;
+        color: #333;
+    }
+
+    .contact p {
+        font-size: 18px;
+    }
+
+    .contact p {
+        font-size: 18px;
+        color: #666;
+        margin-top: 20px;
+    }
+
+/* Form styles */
+form {
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 16px;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Button styles */
+.btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* Footer styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    header {
+        text-align: center;
+    }
+
+        header h1 {
+            font-size: 30px;
+        }
+
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    .hero h2 {
+        font-size: 36px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .service-card {
+        margin: 10px;
+    }
+
+        .service-card h3 {
+            font-size: 20px;
+        }
+
+        .service-card p {
+            font-size: 14px;
+        }
+
+    .about h2 {
+        font-size: 30px;
+    }
+
+    .about p {
+        font-size: 16px;
+    }
+
+    .contact h2 {
+        font-size: 30px;
+    }
+
+    .contact p {
+        font-size: 16px;
+    }
+
+    form {
+        max-width: 100%;
+    }
+}

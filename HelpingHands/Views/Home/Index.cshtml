@@ -1,0 +1,93 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/css/landingpage.css"/>
+</head>
+<body>
+    <section class="hero">
+        <div class="container">
+            <h2>Your Health, Our Priority</h2>
+            <p>Providing quality healthcare services in the comfort of your home.</p>
+            <a href="#contact" class="btn-primary">Contact Us</a>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="service-card">
+                <img src="/css/service1.jpg" alt="Service 1">
+                <h3>Medical Consultation</h3>
+                <p>Access to experienced healthcare professionals for medical consultations.</p>
+            </div>
+            <div class="service-card">
+                <img src="/css/service2.jpg" alt="Service 2">
+                <h3>Nursing Care</h3>
+                <p>Professional nurses to provide you with high quality care.</p>
+            </div>
+            
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>We are dedicated to improving the well-being of our patients by providing high-quality home-based healthcare services. Our team of experienced professionals is committed to your health and comfort.</p>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>If you have any questions or would like to inquire about our services, please don't hesitate to get in touch with us.</p>
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Helping Hands Home-Based Healthcare.</p>
+        </div>
+    </footer>
+
+    <link rel="stylesheet" href="style.css">
+    <script>     
+         <document.addEventListener('DOMContentLoaded', function () 
+         {         
+             const navLinks = document.querySelectorAll('nav a');         
+             for (const navLink of navLinks) {             
+                 navLink.addEventListener('click', function (e) {                 
+                     e.preventDefault();                 
+                     const targetId = this.getAttribute('href').substring(1);                 
+                     const targetElement = document.getElementById(targetId);                 
+                     if (targetElement) {                     
+                         targetElement.scrollIntoView({ behavior: 'smooth' });                 
+                     }             
+                 });         
+             }     
+         }); 
+    </script>
+</body>
+</html>

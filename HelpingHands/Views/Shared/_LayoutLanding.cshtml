@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width-device-with, initial-scale=1.0"/>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="~/css/LayoutStyle.css" />
+</head>
+<body>
+     <header>
+         <a href="#" class="logo">Helping Hands</a>
+
+         <input type="checkbox" id="menu-bar"/>
+         <label for="menu-bar"></label>
+
+         <nav class="navbar">
+             <ul>
+                <li><a>Home</a></li>
+                <li><a>About</a></li>
+                <li><a>Contact</a></li>
+                <li><a>Help</a></li>
+                <li><a>User Account +</a>
+                    <ul>
+                        <li><a>Register</a></li>
+                        <li><a>Login</a></li>
+                    </ul>
+                </li>
+             </ul>
+         </nav>
+     </header>
+
+
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>
