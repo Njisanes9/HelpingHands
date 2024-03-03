@@ -13,7 +13,7 @@
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<link rel="stylesheet" href="~/css/dashboardstyle.css">
 
-	<title>Office Manager</title>
+	<title>Patient</title>
 	<meta name="viewport" content="width=device-width" />
 	<title>@ViewBag.Title</title>
 </head>
@@ -22,41 +22,37 @@
 		<section id="content">
 
 			<main>
-				<div class="head-title">
-					<div class="left">
-						<h1>Dashboard</h1>
-						<ul class="breadcrumb">
-							<li>
-								<a href="#">CarAnd</a>
-							</li>
-
-						</ul>
-					</div>
-
-				</div>
-
+				
 				<ul class="box-info">
-					<li>
-						<i class='bx bxs-receipt'></i>
-						<span class="text">
-							<h3>Create Contract</h3>
+					<li title="Book care contract">
+						<a asp-controller="Contract" asp-action="CreateContract">
+							<i class='bx bxs-receipt'></i>
+							<span class="text">
+								<h3>Book Contract</h3>
 
-						</span>
-					</li>
-					<li>
-						<i class='bx bxs-group'></i>
+							</span>
+						</a>
 						
-						<span class="text">
-							<h3>View Care Visits</h3>
-
-						</span>
 					</li>
-					<li>
-						<i class='bx bxs-building-house' ></i>
-						<span class="text">
-							<h3>Preferred Suburb</h3>
+					<li title="View care visits">
+						<a asp-controller="CareVisit" asp-action="GetPatientCareVisit">
+							<i class='bx bxs-location-plus'></i>
+							<span class="text">
+								<h3>View Care Visits</h3>
 
-						</span>
+							</span>
+						</a>
+						
+					</li>
+					<li title="View chronic conditions">
+						<a asp-controller="PatientCondition" asp-action="Index">
+							<i class='bx bxs-donate-heart'></i>
+							<span class="text">
+								<h3>Chronic Condition</h3>
+
+							</span>
+						</a>
+						
 					</li>
 
 				</ul>

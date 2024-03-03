@@ -1,4 +1,10 @@
 using HelpingHands.DAL;
+using NToastNotify;
+using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
+using Twilio.Clients;
+using Twilio;
+using HelpingHands.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,10 +15,19 @@ builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromSeconds(60);
+    options.IdleTimeout = TimeSpan.FromSeconds(3000);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+builder.Services.AddNotyf(config =>
+{
+    config.DurationInSeconds = 5;
+    config.IsDismissable = true;
+    config.Position = NotyfPosition.TopCenter;
+});
+
+
 
 
 var app = builder.Build();
@@ -29,12 +44,15 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseNotyf();
 app.UseAuthorization();
 app.UseSession();
 
+
+
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Landing}/{id?}");
 
 app.Run();

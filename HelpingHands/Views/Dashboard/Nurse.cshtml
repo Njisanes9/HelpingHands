@@ -1,4 +1,6 @@
-﻿@{
+﻿
+
+@{
 	Layout = "/Views/Shared/_LayoutNurse.cshtml";
 }
 
@@ -20,195 +22,93 @@
 		<section id="content">
 
 			<main>
-				<div class="head-title">
-					<div class="left">
-						<h1>Dashboard</h1>
-						<ul class="breadcrumb">
-							<li>
-								<a href="#">DorDan</a>
-							</li>
+				
+
+				<ul class="box-info">
+					<li title="View new contracts">
+						<a asp-action="GetNurseContract" asp-controller="Contract">
+							<i class='bx bxs-edit'></i>
+							<span class="text">
+								<h3>New Contracts</h3>
+
+							</span>
+						</a>
 						
-						</ul>
-					</div>
-					
-				</div>
+					</li>
+					<li title="View upcoming care visits">
+						<a asp-action="GetUpComingVisit" asp-controller="CareVisit">
+							<i class='bx bxs-group'></i>
+							<span class="text">
+								<h3>Care Visits</h3>
 
-				<ul class="box-info">
-					<li>
-						<i class='bx bxs-edit'></i>
-						<span class="text">
-							<h3>New Contracts</h3>
-							<p>4</p>
-						</span>
+							</span>
+						</a>
+						
 					</li>
-					<li>
-						<i class='bx bxs-group'></i>
-						<span class="text">
-							<h3>Care Visits</h3>
-							<p>4</p>
-						</span>
-					</li>
-					<li>
-						<i class='bx bxs-receipt'></i>
-						<span class="text">
-							<h3>My Contracts</h3>
-							<p>4</p>
-						</span>
+					<li title="Create suburbs to work on">
+						<a asp-action="CreatePreferredSuburb" asp-controller="Suburb">
+							<i class='bx bx-building-house'></i>
+							<span class="text">
+								<h3>Suburbs</h3>
+
+							</span>
+						</a>
+						
 					</li>
 					
 					
 				</ul>
-				<ul class="box-info">
-					<li>
-						<i class='bx bxs-calendar'></i>
-						<span class="text">
-							<h3>Scheduling</h3>
-							<p></p>
-						</span>
-					</li>
-					<li>
-						<i class='bx bx-calendar-heart'></i>
-						<span class="text">
-							<h3>Care Plan</h3>
-							
-						</span>
-					</li>
-					<li>
-						<i class='bx bx-clipboard'></i>
-						<span class="text">
-							<h3>Reports</h3>
-
-						</span>
-					</li>
-					
-
-				</ul>
+				
 
 				<div class="table-data">
 					<div class="order">
 						<div class="head">
-							<h3>Contracts By Suburb</h3>
+							<h3>Upcoming Visits</h3>
 							<i class='bx bx-search'></i>
 							<i class='bx bx-filter'></i>
 						</div>
 						<table>
 							<thead>
 								<tr>
-									<th>Firstname</th>
-									<th>Surname</th>
-									<th>Gender</th>
-									<th>Date Of Birth</th>
-									<th>Emergency Contact</th>
-									<th>Emergency Number</th>
+									<th>Visit Date</th>
+									<th>Approximate Arrival Time</th>
+									<th>Suburb Name</th>
+									<th>Address Line 1</th>
+									
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>
-										
-										<p>Carlos</p>
-									</td>
-									<td>
-										<p>Andrade</p>
-									</td>
-									<td>
-										<p>M</p>
-									</td>
-									<td>
-										<p>1955-10-08</p>
-									</td>
-									<td>
-										Elzunia Andrade
-									</td>
-									<td>
-										0732458796
-									</td>
-									
-								</tr>
-								<tr>
-									<td>
+								@foreach (var visit in ViewBag.Visits)
+								{
+									<tr>
+										<td>@visit.VisitDate.ToString("dd/MM/yyyy")</td>
+										<td>@visit.ApproxArrivalTime.ToString("hh':'mm")</td>
+										<td>@visit.SuburbName</td>
+										<td>@visit.AddressLine1</td>
 
-										<p>Kabelo</p>
-									</td>
-									<td>
-										<p>Padi</p>
-									</td>
-									<td>
-										<p>M</p>
-									</td>
-									<td>
-										<p>1971-12-15</p>
-									</td>
-									<td>
-										<p>Sipho Kuhle</p>
-									</td>
-									<td>
-										<p>0712458796</p>
-									</td>
-									
-								</tr>
-								<tr>
-									<td>
+									</tr>
+								}
 
-										<p>Pulane</p>
-									</td>
-									<td>
-										<p>Masemola</p>
-									</td>
-									<td>
-										<p>F</p>
-									</td>
-									<td>
-										<p>1991-10-12</p>
-									</td>
-									<td>
-										<p>Mandisa Bala</p>
-									</td>
-									<td>
-										<p>0632458796</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-
-										<p>Melanie</p>
-									</td>
-									<td>
-										<p>Mack</p>
-									</td>
-									<td>
-										<p>F</p>
-									</td>
-									<td>
-										<p>1960-08-10</p>
-									</td>
-									<td>
-										<p>Kevin Mack</p>
-									</td>
-									<td>
-										<p>0822458796</p>
-									</td>
-								</tr>
 								
 							</tbody>
 						</table>
 					</div>
 					<div class="todo">
 						<div class="head">
-							<h3>Visit Locations</h3>
+							<h3>Preferred Suburbs</h3>
 							<i class='bx bx-plus'></i>
 							<i class='bx bx-filter'></i>
 						</div>
 						<ul class="todo-list">
-							<li class="completed">
-								<p>Summerstrand</p>
-								<i class='bx bx-dots-vertical-rounded'></i>
-							</li>
-							<li class="completed">
-								<p>Humewood</p>
-								<i class='bx bx-dots-vertical-rounded'></i>
-							</li>
-							
+							@foreach (var suburb in ViewBag.SuburbList)
+							{
+
+								<li class="completed">
+									<p>@suburb.SuburbName</p>
+									<i class='bx bx-dots-vertical-rounded'></i>
+								</li>
+								
+							}																		
 							
 							
 						</ul>

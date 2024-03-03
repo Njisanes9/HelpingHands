@@ -1,0 +1,68 @@
+﻿body {
+    background: #f2f2f2;
+}
+
+.invoice {
+    margin: 90px auto;
+    margin-left:100px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.logo {
+    max-height: 70px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.dl-horizontal {
+    margin: 0;
+}
+
+.mono {
+    font-family: monospace;
+}
+
+.invoice-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+    .invoice-buttons button {
+        margin: 5px;
+    }
+
+
+
+@media (max-width: 768px) {
+    .invoice {
+        width: auto !important;
+    }
+
+    .invoice-body {
+        padding: 15px;
+    }
+
+    .invoice-footer {
+        font-size: 0.9em;
+    }
+
+    .colfix {
+        width: 20%;
+    }
+
+    .invoice-header h1 {
+        font-size: 1.5em;
+    }
+
+    .invoice-header .text-muted {
+        font-size: 0.8em;
+    }
+
+    .media-body {
+        font-size: 0.8em;
+        word-wrap: break-word; /* Add this line to wrap long text */
+    }
+}

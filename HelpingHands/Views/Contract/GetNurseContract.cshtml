@@ -1,0 +1,106 @@
+﻿@model List<CareContract>
+@{
+    ViewData["Title"] = "GetNurseContract";
+    Layout = "~/Views/Shared/_LayoutNurse.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Invoice</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link rel="stylesheet" href="~/css/contractstylesheet.css" />
+</head>
+<body>
+    <h2> New Contract(s) By You Preferred Suburbs</h2>
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var contract in Model)
+        {
+            <div class="container invoice">
+                <div class="invoice-header">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-8">
+                            <h1>Patient <small>Care Contract</small></h1>
+                            <h4 class="text-muted">Contract Date:|  @contract.ContractDate.ToString("dd/MM/yyyy")</h4>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="invoice-body">
+                    <div class="row">
+
+                        <div class="col-xs-12 col-sm-7">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Contract Details</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <dl class="dl-horizontal">
+                                        <dt>Fullname</dt>
+                                        <dd>@contract.Fullname</dd>
+                                        <dt>Gender</dt>
+                                        <dd>@contract.Gender</dd>
+                                        <dt>Start Date</dt>
+                                        <dd>@contract.StartDate?.ToString("dd/MM/yyyy")</dd>
+                                        <dt>Address Line</dt>
+                                        <dd>@contract.AddressLine1</dd>
+                                        <dt>Suburb Name</dt>
+                                        <dd>@contract.SuburbName</dd>
+                                        <dt>Status</dt>
+                                        <dd>@contract.Status</dd>
+                                        <dt>&nbsp;</dt>
+                                        <dd>&nbsp;</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Wound Description</h3>
+                        </div>
+                        <table class="table table-bordered table-condensed">
+                            <!-- Table content... -->
+                        </table>
+                    </div>
+                    <div class="panel panel-default">
+                        <table class="table table-bordered table-condensed">
+                            <!-- Table content... -->
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-7">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    
+                                    <hr style="margin:3px 0 5px" /> @contract.WoundDescription
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="invoice-footer">
+                    <div class="invoice-buttons">
+                        <a asp-action="NurseSelectContract" asp-controller="Contract" asp-route-id="@contract.ContractId" class="btn btn-primary">Select Contract</a>
+                    </div>
+
+                </div>
+            </div>
+        }
+
+    }
+    else
+    {
+        <p>No contract records available</p>
+    }
+
+  
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

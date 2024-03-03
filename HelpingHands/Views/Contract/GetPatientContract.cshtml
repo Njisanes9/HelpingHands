@@ -1,0 +1,124 @@
+﻿@model List<HelpingHands.Models.CareContract>
+@{
+    ViewData["Title"] = "GetPatientContract";
+    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Care Contract</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/contractstylesheet.css" />
+</head>
+<body>
+    @if (TempData["errorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error: </strong> @TempData["errorMessage"]
+           
+        </div>
+    }
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var contract in Model)
+        {
+            <div class="container invoice">
+                <div class="invoice-header">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-8">
+                            <h1>Care Contract</h1>
+                            <h4 class="text-muted">Date : @contract.ContractDate.ToString("dd/MM/yyyy")</h4>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="invoice-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-5">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Contract Details</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <dl class="dl-horizontal">
+                                        <dt>Nurse</dt>
+                                        <dd>@(string.IsNullOrEmpty(contract.Fullname) ? "" : contract.Fullname)</dd>
+                                        <dt>Gender</dt>
+                                        <dd>@contract.Gender</dd>
+                                        <dt>Start Date</dt>
+                                        <dd>@(contract.StartDate == DateTime.MinValue ? "" : contract.StartDate?.ToString("dd/MM/yyyy"))</dd>
+                                        <dt>End Date</dt>
+                                        <dd>@(contract.EndDate == DateTime.MinValue ? "" : contract.StartDate?.ToString("dd/MM/yyyy"))</dd>
+                                        <dt>Address Line 1</dt>
+                                        <dd>@contract.AddressLine1</dd>
+                                        <dt>Address Line 2</dt>
+                                        <dd>@(string.IsNullOrEmpty(contract.AddressLine2) ? "" : contract.AddressLine2)</dd>
+                                        <dt>Suburb Name</dt>
+                                        <dd>@contract.SuburbName</dd>
+                                        <dt>Status</dt>
+                                        <dd>@contract.Status</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Wound Description</h3>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-7">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+
+                                    <hr style="margin:3px 0 5px" /> @contract.WoundDescription
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="invoice-footer">
+                    <div class="row">
+                        <div class="invoice-buttons">
+
+                            <a class="btn btn-secondary" asp-controller="CareVisit" asp-action="GetPatientCareVisitByContract" asp-route-id="@contract.ContractId">Contract Visits</a>
+                            @if (contract.Status == "Assigned" || contract.Status == "Closed")
+                            {
+                                <a class="btn btn-success" asp-controller="Contract" asp-action="UpdateCareContract" asp-route-id="@contract.ContractId" disabled>Update Contract</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-success" asp-controller="Contract" asp-action="UpdateCareContract" asp-route-id="@contract.ContractId">Update Contract</a>
+                            }
+                            @if (contract.Status == "New")
+                            {
+                                <form method="post" asp-controller="Contract" asp-route-id="@contract.ContractId" asp-action="CancelContract">
+                                    <button class="btn btn-warning" type="submit">Cancel Contract</button>
+                                </form>
+                            }
+                            
+
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <h2>You have not contracts available</h2>
+    }
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

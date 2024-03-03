@@ -1,0 +1,155 @@
+﻿@model Tuple<HelpingHands.Models.CareContract, List<HelpingHands.Models.Nurse>>
+@{
+    ViewData["Title"] = "GetNurseByContractSuburb";
+    Layout = "~/Views/Shared/_LayoutOfficeManager.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            height: 100vh;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .center {
+            text-align: center;
+            margin: 2% 10%;
+        }
+
+            .center h2 {
+                font-weight: bold;
+            }
+
+        .button-container {
+            float: left;
+            margin: 20px 0;
+        }
+
+        .content-table {
+            background: #ffffff;
+            border-collapse: collapse;
+            font-size: 0.9em;
+            width: 100%;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+            .content-table thead tr {
+                background-color: lightblue;
+                color: #ffffff;
+                text-align: left;
+                font-weight: bold;
+            }
+
+            .content-table th,
+            .content-table td {
+                padding: 12px 15px;
+            }
+
+            .content-table tbody tr {
+                border-bottom: 1px solid #dddddd;
+            }
+
+                .content-table tbody tr:nth-of-type(even) {
+                    background-color: #f3f3f3;
+                }
+
+                .content-table tbody tr:last-of-type {
+                    border-bottom: 2px solid #009879;
+                }
+
+                .content-table tbody tr .active-row {
+                    font-weight: bold;
+                    color: #009879;
+                }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+    <div class="center">
+        <h2> Available Nurses By Suburb</h2>
+        <hr>
+        <input type="text" id="searchInput" placeholder="Search...">
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Gender</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Item2.Any())
+                {
+                    @foreach (var nurse in Model.Item2)
+                    {
+                        <tr>
+                            <td>@nurse.FullName</td>
+                            <td>@nurse.Gender</td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <form method="post" asp-action="AssignContract" asp-controller="OfficeManager" asp-route-nurseId="@nurse.NurseId">
+                                        <input type="hidden" name="contractId" value="@Model.Item1.ContractId" />
+                                        <button type="submit" class="btn btn-primary">Assign</button>
+                                    </form>                                    
+                                    &nbsp
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="2">
+                            <div>No nurses available!</div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+    </div>
+    <script>
+        document.getElementById("searchInput").addEventListener("input", function () {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.querySelector(".table");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) {
+                var found = false;
+                var tds = tr[i].getElementsByTagName("td");
+                for (var j = 0; j < tds.length; j++) {
+                    td = tds[j];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+                if (found) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

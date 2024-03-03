@@ -1,38 +1,76 @@
 ﻿@model HelpingHands.Models.Login
 
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta  charset="utf-8"/>
-		<title>User Login</title>
-		<link rel="stylesheet" href="~/css/AccountStyle.css" />
-	</head>
-	<body>
-		<div class="center">
-			<h1>User Login</h1>
-			
-			<form method="post" action="/User/Login">
-				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-				<span class="text-danger text-center">@ViewData["logError"]</span>
-				<div class="txt_field">
-					<input type="text" autocapitalize="off" class="form-control" asp-for="UserName" autocomplete="off" />
-					<span asp-validation-for="UserName" class="text-danger"></span>
-					<label class="required">Username</label>
-				</div>
-				<div class="txt_field">
-					<input type="password" autocapitalize="off" class="form-control" asp-for="Password" autocomplete="off" />
-					<span asp-validation-for="Password" class="text-danger"></span>
-					<label class="required"> Password</label>
-				</div>
-				<div class="pass">Forgot Password?</div>
-				<input type="submit" value="Login"/>
-				<div class="signup_link">
-					Create Account
-					<a>Sign Up</a>
-				</div>
-			</form>
-		</div>
+<html lang="en" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>User Login </title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+    <link href="~/css/Loginstylesheet.css" rel="stylesheet">
+
+</head>
+
+<body class="h-100">
+    <div class="authincation h-100">
+        <div class="container-fluid h-100">
+            <div class="row justify-content-center h-100 align-items-center">
+                <div class="col-md-6">
+                    <div class="authincation-content">
+                        <div class="row no-gutters">
+                            <div class="col-xl-12">
+                                <div class="auth-form">
+                                    <h4 class="text-center mb-4">Login To Your Account</h4>
+                                    <form method="post">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        @if (TempData["logError"] != null)
+                                        {
+                                            <p class="text-danger">@TempData["logError"]</p>
+                                        }
+                                        <div class="form-group">
+                                            <label class="required"><strong>User Name</strong></label>
+                                            <input type="text" asp-for="UserName" class="form-control" placeholder="User Name">
+                                            <span asp-validation-for="UserName" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="required"> <strong>Password</strong></label>
+                                            <input type="password" asp-for="Password" class="form-control" placeholder="Password">
+                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                        </div>
+                                        
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary btn-block">Log In</button>
+                                        </div>
+                                    </form>
+                                    <div class="new-account mt-3">
+                                        <p>Don't have an account? <a class="text-primary" asp-action="Login" asp-controller="User">Register</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-	</body>
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <script src="~/js/global.min.js"></script>
+    <script src="~/js/quixnav-init.js"></script>
+    <script src="~/js/custom.min.js"></script>
+
+</body>
+
 </html>
+
+
+
+
+

@@ -1,46 +1,81 @@
 ﻿@model HelpingHands.Models.User
 
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<title>Patient Registration</title>
-	<link rel="stylesheet" href="~/css/AccountStyle.css" />
-</head>
-<body>
-	<div class="center">
-		<h1>Patient Registration</h1>
-		<form method="post" enctype="multipart/form-data" action="Register">
-			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-			<div class="txt_field">
-				<input type="text" autocapitalize="off" asp-for="UserName" class="form-control" autocomplete="off" />
-				<span asp-validation-for="UserName" class="text-danger"></span>
-				<label class="required">Username</label>
-			</div>
-			<div class="txt_field">
-				<input type="email" autocapitalize="off" asp-for="Email" class="form-control" autocomplete="off" />
-				<span asp-validation-for="Email" class="text-danger"></span>
-				<label class="required">Email</label>
-			</div>
-			<div class="txt_field">
-				<input type="number" autocapitalize="off" asp-for="ContactNumber" class="form-control" autocomplete="off" />
-				<span asp-validation-for="ContactNumber" class="text-danger"></span>
-				<label class="required">Contact Number</label>
-			</div>
-			<div class="txt_field">
-				<input type="password" autocapitalize="off" class="form-control" asp-for="Password" />
-				<span asp-validation-for="Password" class="text-danger"></span>
-				<label class="required">Password</label>
-			</div>
-			@*<div class="pass">Forgot Password?</div>*@
-			<input type="submit" value="Register" />
-			<div class="signup_link">
-				Already have an account?
-				<a asp-controller="User" asp-action="Login">Login</a>
-			</div>
-		</form>
-	</div>
 
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>User Registration</title>
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+    <link href="~/css/Loginstylesheet.css" rel="stylesheet">
+
+</head>
+
+<body class="h-100">
+    <div class="authincation h-100">
+        <div class="container-fluid h-100">
+            <div class="row justify-content-center h-100 align-items-center">
+                <div class="col-md-6">
+                    <div class="authincation-content">
+                        <div class="row no-gutters">
+                            <div class="col-xl-12">
+                                <div class="auth-form">
+                                    <h4 class="text-center mb-4">Login To Your Account</h4>
+                                    <form method="post" enctype="multipart/form-data" action="Register">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <div class="form-group">
+                                            <label class="required"><strong>User Name</strong></label>
+                                            <input type="text" asp-for="UserName" class="form-control" placeholder="User Name">
+                                            <span asp-validation-for="UserName" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="required"><strong>Email</strong></label>
+                                            <input type="email" asp-for="Email" class="form-control" placeholder="Email">
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="required"><strong>Contact Number</strong></label>
+                                            <input type="number" asp-for="ContactNumber" class="form-control" placeholder="Contact Number">
+                                            <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="required"><strong>Password</strong></label>
+                                            <input type="password" asp-for="Password" class="form-control" placeholder="Password">
+                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                        </div>
+                                        
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary btn-block">Register</button>
+                                        </div>
+                                    </form>
+                                    <div class="new-account mt-3">
+                                        <p>Already have an account? <a class="text-primary" asp-action="Login" asp-controller="User">Login</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <script src="~/js/global.min.js"></script>
+    <script src="~/js/quixnav-init.js"></script>
+    <script src="~/js/custom.min.js"></script>
 
 </body>
+
 </html>

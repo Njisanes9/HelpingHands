@@ -1,0 +1,73 @@
+﻿@model Patient
+@inject IHttpContextAccessor contextAccessor;
+@{
+    ViewData["Title"] = "PatientProfile";
+    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+}
+
+<link href="css/profilestyle.css" rel="stylesheet" />
+
+<div class="profile">
+    <figure>
+        <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/55758/random-user-31.jpg" alt="" />
+    </figure>
+    <header>
+        <h1>
+            Maria Gonzalez
+            <small>@contextAccessor.HttpContext?.Session.GetString("UserTypeDescription")</small>
+        </h1>
+    </header>
+
+    <div class="toggle">
+        <input type="checkbox" class="view_details" id="view_details">
+        <label for="view_details" title="tap here to view full profile">☰</label>
+    </div>
+    <main>
+        <dl>
+            <dt>Surname</dt>
+            <dd>@Html.DisplayFor(Model => Model.Surname)</dd>
+            <dt>Name</dt>
+            <dd>@Html.DisplayFor(Model => Model.Name)</dd>
+            <dt>Gender</dt>
+            <dd>@Html.DisplayFor(Model => Model.Gender)</dd>
+            <dt>ID Number</dt>
+            <dd>@Html.DisplayFor(Model => Model.IDNumber)</dd>
+
+
+            <dd>
+                <a asp-action="UpdateNurse" asp-controller="User" asp-route-id="@Model.UserId" class="btn btn-primary">Edit Profile</a>
+
+            </dd>
+        </dl>
+    </main>
+
+</div>
+
+<script>
+    $(function () {
+        $('.view_details').click(function () {
+            if ($(this).is(':checked')) {
+                $(this)
+                    .next('label')
+                    .html('&times;')
+                    .attr('title', 'tap here to close full profile');
+                $(this)
+                    .parent()
+                    .next('main')
+                    .slideDown('normal');
+            } else {
+                $(this)
+                    .next('label')
+                    .html('☰')
+                    .attr('title', 'tap here to view full profile');
+                $(this)
+                    .parent()
+                    .next('main')
+                    .slideUp('fast');
+            }
+        });
+    });
+</script>
+
+
+

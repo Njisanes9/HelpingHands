@@ -1,0 +1,153 @@
+﻿@model List<PrefferedSuburb>
+@{
+    ViewData["Title"] = "GetNurseSuburb";
+    Layout = "~/Views/Shared/_LayoutOfficeManager.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            height: 100vh;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .center {
+            text-align: center;
+            margin: 2% 10%;
+        }
+
+            .center h2 {
+                font-weight: bold;
+            }
+
+        .button-container {
+            float: left;
+            margin: 20px 0;
+        }
+
+        .content-table {
+            background: #ffffff;
+            border-collapse: collapse;
+            font-size: 0.9em;
+            width: 100%;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+            .content-table thead tr {
+                background-color: lightblue;
+                color: #ffffff;
+                text-align: left;
+                font-weight: bold;
+            }
+
+            .content-table th,
+            .content-table td {
+                padding: 12px 15px;
+            }
+
+            .content-table tbody tr {
+                border-bottom: 1px solid #dddddd;
+            }
+
+                .content-table tbody tr:nth-of-type(even) {
+                    background-color: #f3f3f3;
+                }
+
+                .content-table tbody tr:last-of-type {
+                    border-bottom: 2px solid #009879;
+                }
+
+                .content-table tbody tr .active-row {
+                    font-weight: bold;
+                    color: #009879;
+                }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+    <div class="center">
+        <h2> Nurse Suburbs</h2>
+        <hr>
+        <div class="button-container">
+            <a asp-action="GetAllNurses" asp-controller="OfficeManager" class="btn btn-primary">Back</a>
+            
+            
+        </div>
+        <input type="text" id="searchInput" placeholder="Search...">
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>Suburb Name</th>
+                    <th>City Name</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var suburb in Model)
+                    {
+                        <tr>
+                            <td>@suburb.SuburbName</td>
+                            <td>@suburb.CityName</td>
+
+                        </tr>
+                    }
+
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="2">
+                            <div>No records available!</div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+    </div>
+    <script>
+        document.getElementById("searchInput").addEventListener("input", function () {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.querySelector(".table");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) {
+                var found = false;
+                var tds = tr[i].getElementsByTagName("td");
+                for (var j = 0; j < tds.length; j++) {
+                    td = tds[j];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+                if (found) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        });
+    </script>
+
+
+
+</body>
+</html>

@@ -1,4 +1,5 @@
-﻿using HelpingHands.DAL;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using HelpingHands.DAL;
 using HelpingHands.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,10 +8,13 @@ namespace HelpingHands.Controllers
     public class CityController : Controller
     {
         private readonly DataAccessLayer _dal;
+        private readonly INotyfService _toastNotification;
 
-        public CityController(DataAccessLayer dal)
+        public CityController(DataAccessLayer dal,
+            INotyfService notyfService)
         {
             _dal = dal;
+            _toastNotification = notyfService;
         }
 
         [HttpGet]
@@ -40,35 +44,48 @@ namespace HelpingHands.Controllers
 
             if (!ModelState.IsValid)
             {
-                TempData["errorMessage"] = "Data is not valid";
+                TempData["errorMessage"] = "Model is not valid";
             }
 
-            bool result = _dal.InsertCity(city);
-
-            if (!result)
+            if (city !=null)
             {
-                TempData["errorMessage"] = "Data cannot be saved";
-                return View();
+                bool result = _dal.InsertCity(city);
+
+                if (!result)
+                {
+                    _toastNotification.Success("Record has been inserted successfully");
+                    return RedirectToAction("Index");
+                    
+                }
+                else
+                {
+                    TempData["errorMessage"] = "City details cannot be saved";
+                    return View();
+                }
+                
             }
-            TempData["successMessage"] = "Record saved successfully";
-            return RedirectToAction("Index");
+            return View(city);
         }
+            
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
             try
             {
+                
                 City city = _dal.GetCityById(id);
+                 
                 if (city.CityId == 0)
                 {
                     TempData["errorMessage"] = $"City details with Id {id} cannot be found";
+                    return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
+                                
+                return View(city);
             }
             catch (Exception ex)
             {
-
                 TempData["errorMessage"] = ex.Message;
                 return View();
             }
@@ -76,7 +93,7 @@ namespace HelpingHands.Controllers
         [HttpPost]
         public IActionResult Edit(City city)
         {
-
+            
             try
             {
                 if (!ModelState.IsValid)
@@ -85,15 +102,28 @@ namespace HelpingHands.Controllers
                     return View();
                 }
 
-                bool result = _dal.UpdateCity(city);
-
-                if (!result)
+                if (ModelState.IsValid)
                 {
-                    TempData["errorMessage"] = "Data cannot be updated";
-                    return View();
+                    bool result = _dal.UpdateCity(city);
+
+                    if (!result)
+                    {
+                        _toastNotification.Success("City is updated successfully");
+                        
+                    }
+                    else
+                    {
+
+                        TempData["errorMessage"] = "City cannot be updated";
+                        return View();
+
+                    }
+                   
                 }
-                TempData["successMessage"] = "Record update successfully";
+                                
                 return RedirectToAction("Index");
+                
+                
             }
             catch (Exception ex)
             {
@@ -101,11 +131,12 @@ namespace HelpingHands.Controllers
                 TempData["errorMessage"] = ex.Message; 
                 return View();
             }
+           
         }
 
 
         [HttpGet]
-        public IActionResult Delete(int id)
+        public JsonResult Delete(int id)
         {
             try
             {
@@ -114,14 +145,15 @@ namespace HelpingHands.Controllers
                 {
                     TempData["errorMessage"] = $"City details with Id {id} cannot be found";
                 }
-                return RedirectToAction("Index");
+                return Json($"{id}");
             }
             catch (Exception ex)
             {
 
                 TempData["errorMessage"] = ex.Message;
-                return View();
+               
             }
+            return Json($"{id}");
         }
         [HttpPost]
         public IActionResult DeleteConfirmed(City city)
@@ -137,7 +169,7 @@ namespace HelpingHands.Controllers
                     TempData["errorMessage"] = "Data cannot be updated";
                     return View();
                 }
-                TempData["successMessage"] = "Record deleted successfully";
+                _toastNotification.Success("City has been deleted succeessfully",4);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)

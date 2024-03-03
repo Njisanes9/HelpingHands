@@ -10,8 +10,7 @@ namespace HelpingHands.Models
         public int ContractId { get; set; }
 
         [Required]
-        [DisplayName("Visit Date")]
-        [StringLength(8)]
+        [DisplayName("Visit Date")]        
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime VisitDate { get; set; }
@@ -19,33 +18,28 @@ namespace HelpingHands.Models
 
         [Required]
         [DisplayName("Approximate Arrival Time")]
-        [StringLength(7)]
-        [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:hh:mm:ss tt}", ApplyFormatInEditMode = true)]
-        public DateTime ApproxArriveTime { get; set; }
+        [DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
+        public DateTime? ApproxArriveTime { get; set; }
+        
 
 
-        [Required]
-        [DisplayName("Visit Arrival Time")]
-        [StringLength(7)]
-        [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:hh:mm:ss tt}", ApplyFormatInEditMode = true)]
-        public DateTime VisitArrivalTime { get; set; }
+        
+        [DisplayName("Visit Arrival Time")]        
+        [DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
+        public DateTime? VisitArrivalTime { get; set; } 
 
-        [Required]
-        [DisplayName("Visit Depart Time")]
-        [StringLength(7)]
-        [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:hh:mm:ss tt}", ApplyFormatInEditMode = true)]
-        public DateTime VisitDepartTime { get; set; }
+        
+        [DisplayName("Visit Depart Time")]            
+        [DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
+        public DateTime? VisitDepartTime { get; set; } 
 
 
         [Required]
         [StringLength(500)]
-        public string WoundCondition { get; set; }
+        public string? WoundCondition { get; set; }
 
-        [Required]
+        
         [StringLength(500)]
-        public string Notes { get; set; }
+        public string? Notes { get; set; }
     }
 }

@@ -1,0 +1,138 @@
+﻿@model List<HelpingHands.ViewModels.CareVisitDetailsVM>
+@{
+    ViewData["Title"] = "GetAllCareVisits";
+    Layout = "~/Views/Shared/_LayoutOfficeManager.cshtml";
+}
+
+@* https://codepen.io/Ajay-Kalal/full/LYXJPWy *@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Invoice</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/contractstylesheet.css" />
+</head>
+<body>
+    <h2> Contract Care Visits</h2>
+    <br />
+    @if (TempData["errorMessage"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>No Care Visit: </strong> @TempData["errorMessage"]
+
+        </div>
+    }
+    <br />
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var visit in Model)
+        {
+
+            <div class="container invoice">
+                <div class="invoice-header">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-8">
+                            <h1>Care Visit</h1>
+                            <h4 class="text-muted">Visit Date:|  @visit.VisitDate.ToString("dd/MM/yyyy")</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="invoice-body">
+                    <div class="row">
+
+                        <div class="col-xs-12 col-sm-7">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Care Visit Details</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <dl class="dl-horizontal">
+                                        <dt>Nurse Name</dt>
+                                        <dd>@visit.Fullname.ToString()</dd>
+
+                                        <dt>Visit Date</dt>
+                                        <dd>@visit.VisitDate.ToString("dd/MM/yyyy")</dd>
+
+                                        <dt>Approximate Arrival</dt>
+                                        <dd>@visit.ApproxArriveTime.ToString("hh':'mm")</dd>
+
+                                        <dt>Visit Arrival Time</dt>
+                                        <dd>@visit.ArriveTime.ToString("hh':'mm")</dd>
+
+                                        <dt>Visit Depart Time</dt>
+                                        <dd>@visit.DepartTime.ToString("hh':'mm")</dd>
+
+                                        <dt>&nbsp;</dt>
+                                        <dd>&nbsp;</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Additional Information</h3>
+                        </div>
+                        <table class="table table-bordered table-condensed">
+                            <!-- Table content... -->
+                        </table>
+                    </div>
+                    <div class="panel panel-default">
+                        <table class="table table-bordered table-condensed">
+                            <!-- Table content... -->
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-7">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Wound Condition</h3>
+                                    </div>
+                                    <hr style="margin:3px 0 5px" /> @visit.WoundCondition
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-5">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Notes</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p>@visit.Notes</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        }
+
+    }
+    else
+    {
+        <table class="content-table">
+            <thead>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td colspan="6">
+                        <h2>No records available!</h2>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    }
+
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

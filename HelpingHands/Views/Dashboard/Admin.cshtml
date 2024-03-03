@@ -3,7 +3,6 @@
     ViewData["Title"] = "Administrator";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,53 +12,58 @@
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<link rel="stylesheet" href="~/css/dashboardstyle.css">
 
-	<title>Nurse</title>
+	<title>Office Manager</title>
 	<meta name="viewport" content="width=device-width" />
 	<title>@ViewBag.Title</title>
 </head>
 <body>
-	<div class="container">
+	
 		<section id="content">
 
 			<main>
-				<div class="head-title">
-					<div class="left">
-						<h1>Dashboard</h1>
-						<ul class="breadcrumb">
-							<li>
-								<a href="#">Admin</a>
-							</li>
-
-						</ul>
-					</div>
-
-				</div>
+				
 
 				<ul class="box-info">
-					<li>
-						<i class='bx bxs-edit'></i>
-						<span class="text">
-							<h3>Manage Users</h3>
-							
-						</span>
+					<li title="Add employee users">
+						<a asp-controller="User" asp-action="AddEmployee">
+							<i class='bx bxs-user-detail'></i>
+							<span class="text">
+								<h3>Manage Employees</h3>
+
+							</span>
+						</a>
+
 					</li>
-					<li>
-						<i class='bx bxs-business'></i>
-						<span class="text">
-							<h3>Company</h3>
-							
-						</span>
+					<li title="Add new cities">
+						
+						<a asp-controller="City" asp-action="Create">
+							<i class='bx bxs-map-pin'></i>
+							<span class="text">
+								<h3>Manage Location</h3>
+
+							</span>
+						</a>
+						
 					</li>
-					
+					<li title="Add new conditions">
+						
+						<a asp-controller="City" asp-action="Create">
+							<i class='bx bxs-heart'></i>
+							<span class="text">
+								<h3>Chronic Conditions</h3>
+
+							</span>
+						</a>
+						
+					</li>
+
 				</ul>
 
-
-				
 			</main>
-
+			
 		</section>
 
-	</div>
+	
 	<script src="~/js/Dashboardscript.js"></script>
 </body>
 </html>

@@ -1,4 +1,5 @@
-﻿using HelpingHands.DAL;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using HelpingHands.DAL;
 using HelpingHands.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,10 +8,16 @@ namespace HelpingHands.Controllers
     public class ConditionController : Controller
     {
         private readonly DataAccessLayer _dal;
+        private readonly IHttpContextAccessor _contextAccessor;
+        private readonly INotyfService _toastNotification;
 
-        public ConditionController(DataAccessLayer dal)
+        public ConditionController(DataAccessLayer dal,
+            INotyfService toastNotification,
+            IHttpContextAccessor httpContextAccessor)
         {
             _dal = dal;
+            _contextAccessor = httpContextAccessor;
+            _toastNotification = toastNotification;
         }
 
         [HttpGet]
@@ -47,11 +54,16 @@ namespace HelpingHands.Controllers
 
             if (!result)
             {
-                TempData["errorMessage"] = "Data cannot be saved";
-                return View();
+                _toastNotification.Success("Condition is saved successfully");
+                return View(condition);
             }
-            TempData["successMessage"] = "Record saved successfully";
-            return RedirectToAction("Index");
+            else
+            {
+                TempData["errorMessage"] = "Data cannot be saved";
+                return View(condition);
+            }
+            
+            
         }
 
         [HttpGet]
@@ -59,16 +71,20 @@ namespace HelpingHands.Controllers
         {
             try
             {
+
                 ChronicCondition condition = _dal.GetConditionById(id);
+                condition.ConditionId = id;
                 if (condition.ConditionId == 0)
                 {
-                    TempData["errorMessage"] = $"City details with Id {id} cannot be found";
+                    TempData["errorMessage"] = $"Condition details with Id {id} cannot be found";
+                    return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
+
+
+                return View(condition);
             }
             catch (Exception ex)
             {
-
                 TempData["errorMessage"] = ex.Message;
                 return View();
             }
@@ -89,56 +105,17 @@ namespace HelpingHands.Controllers
 
                 if (!result)
                 {
-                    TempData["errorMessage"] = "Data cannot be updated";
-                    return View();
+                    _toastNotification.Success("Condition is updated successfully");
+                    
+                    return RedirectToAction("Index","Condition");
                 }
-                TempData["successMessage"] = "Record update successfully";
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-
-                TempData["errorMessage"] = ex.Message;
-                return View();
-            }
-        }
-
-
-        [HttpGet]
-        public IActionResult Delete(int id)
-        {
-            try
-            {
-                ChronicCondition condition = _dal.GetConditionById(id);
-                if (condition.ConditionId == 0)
-                {
-                    TempData["errorMessage"] = $"City details with Id {id} cannot be found";
-                }
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-
-                TempData["errorMessage"] = ex.Message;
-                return View();
-            }
-        }
-        [HttpPost]
-        public IActionResult DeleteConfirmed(ChronicCondition condition)
-        {
-
-            try
-            {
-
-                bool result = _dal.DeleteCity(condition.ConditionId);
-
-                if (!result)
+                else
                 {
                     TempData["errorMessage"] = "Data cannot be updated";
                     return View();
                 }
-                TempData["successMessage"] = "Record deleted successfully";
-                return RedirectToAction("Index");
+                
+               
             }
             catch (Exception ex)
             {
@@ -147,5 +124,9 @@ namespace HelpingHands.Controllers
                 return View();
             }
         }
+
+
+        
+        
     }
 }

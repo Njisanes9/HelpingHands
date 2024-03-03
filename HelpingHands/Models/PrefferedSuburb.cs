@@ -6,9 +6,11 @@ namespace HelpingHands.Models
     {
         public int PrefSuburbId { get; set; }
 
-        public int NurseId { get;}
+        public int NurseId { get; set; }        
+        
+        public int SuburbId { get; set; }
 
-        [DisplayName("Suburb")]
-        public int SuburbId { get;}
+        public string? SuburbName { get; set; }
+        public string? CityName { get; set; }
     }
 }
