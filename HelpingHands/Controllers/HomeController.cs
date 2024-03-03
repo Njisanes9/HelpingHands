@@ -18,11 +18,6 @@ namespace HelpingHands.Controllers
             return View();
         }
 
-        public IActionResult Landing()
-        {
-            return View();
-        }
-
         public IActionResult Privacy()
         {
             return View();

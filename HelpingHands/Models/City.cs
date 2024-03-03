@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
 
 namespace HelpingHands.Models
 {
@@ -8,18 +7,12 @@ namespace HelpingHands.Models
     {
         public int CityId { get; set; }
 
-        
+        [StringLength(100)]
         [DisplayName("City Name")]
-        [Required(ErrorMessage ="Please provide city name")]
         public string CityName { get; set; }
 
-        
+        [StringLength(100)]
         [DisplayName("City Abbreviation")]
-        [Required(ErrorMessage = "Please provide abbreaviation")]
         public string Abbreviation { get; set; }
-    }
-    public class GetSuburb : SelectListItem
-    {
-        public string? SuburbName { get; set; }
     }
 }

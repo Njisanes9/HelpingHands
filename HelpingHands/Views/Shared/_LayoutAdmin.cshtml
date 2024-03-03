@@ -1,184 +1,51 @@
-﻿@inject IHttpContextAccessor contextAccessor;
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+
+<html>
 <head>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrator</title>
-    <link rel="stylesheet" href="~/css/userstysheet.css"/>
-    
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" >
-    <style>
-        
-
-        .wrapper .sidebar {
-            
-            left: 0; 
-            width: 225px;
-            height: 100%;
-        }        
-
-        .parent-li {
-            position: relative; 
-        }
-
-        .sub-menu {
-            display: none;
-        }
-
-        .sub-menu {
-            position: absolute;
-            top: 0;
-            left: 100%; 
-            background-color: rgb(5, 68, 104);
-            border: 1px solid #ccc;
-            padding: 10px;
-            list-style: none;
-            margin: 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            width: 200px;
-        }
-
-        .parent-li:hover .sub-menu,
-        .parent-li:focus-within .sub-menu {
-            display: block;
-        }
-
-
-    </style>
-
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width-device-with, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <link rel="stylesheet" href="~/css/LayoutStyle.css" />
 </head>
 <body>
-   
-    <div class="wrapper">
-        <div class="section">
-            <div class="top_navbar">
-                <div class="hamburger">
-                    <a href="#">
-                        <i class="fas fa-bars"></i>
-                    </a>
-                </div>
-            </div>
-             
-        </div>
-        <div class="sidebar">
-            <div class="profile">
-                <img src="~/css/Default.jpg" alt="profile_picture">
-                <h3>@contextAccessor.HttpContext?.Session.GetString("UserName")</h3>
-                <p>@contextAccessor.HttpContext?.Session.GetString("UserTypeDescription")</p>
-            </div>
+    <header>
+        <a href="#" class="logo">
+            <img src="~/css/logo.jpeg">
+            Helping Hands
+        </a>
+
+        <input type="checkbox" id="menu-bar" />
+        <label for="menu-bar">Menu</label>
+
+        <nav class="navbar">
             <ul>
-               
-                <li>
-                    <a asp-controller="Dashboard" asp-action="Admin">
-                        <span class="icon"><i class="fas fa-desktop"></i></span>
-                        <span class="item">Dashboard</span>
-                    </a>
-                </li>
-                <li class="parent-li">
-                    <a>
-                        <span class="icon"><i class="fas fa-user-friends"></i></span>
-                        <span class="item">User</span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li><a asp-controller="User" asp-action="AddEmployee">Add User</a></li>
-                        <li><a asp-controller="User" asp-action="Index">Employee Users</a></li>  
-                        <li><a asp-controller="User" asp-action="GetAllUsers">All Users</a></li>                        
-                        <li><a asp-controller="User" asp-action="GetUsersForPassword">Change Password</a></li>
-                    </ul>
-                </li>
-                <li class="parent-li">
-                    <a href="#">
-                        <span class="icon"><i class="fa fa-heartbeat"></i></span>
-                        <span class="item">Conditions</span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li><a asp-controller="Condition" asp-action="Create">Add Condition</a></li>
-                        <li><a asp-controller="Condition" asp-action="Index">Display Condition</a></li>
-                        
-                    </ul>
-                </li>
-                <li class="parent-li">
-                    <a href="#">
-                        <span class="icon"><i class='fas fa-map-marker-alt'></i></span>
-                        <span class="item">Locations</span>
+                <li><a><i class="fa-solid fa-gauge"></i>Dashboard</a></li>
+                <li><a id="about"><i class="fa-solid fa-file-contract"></i>Users</a></li>
+                <li><a id="contact">Cities</a></li>
+                <li><a id="services">Company Profile</a></li>
 
-                    </a>
-                    <ul class="sub-menu">
-                        <li><a asp-controller="City" asp-action="Create">Add City</a></li>
-                        <li><a asp-controller="City" asp-action="Index">Display Cities</a></li>
-                        <li><a asp-controller="Suburb" asp-action="Create">Add Suburb</a></li>
-                        <li><a asp-controller="Suburb" asp-action="Index">Display Suburbs</a></li>
-                    </ul>
-                </li>
-                
-                <li class="parent-li">
-                    <a href="#">
-                        <span class="icon"><i class='fas fa-business-time'></i></span>
-                        <span class="item">Company</span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li><a asp-controller="Business" asp-action="Create">Add Information</a></li>
-                        <li><a asp-controller="Business" asp-action="Index">Display Information</a></li>
-                        
-                    </ul>
-                </li>
                 <li>
-                    <a asp-controller="User" asp-action="Login">
-                        <span class="icon"><i class="fa fa-arrow-circle-o-left"></i></span>
-                        <span class="item">Logout</span>
-                    </a>
+                    <a>User Account +</a>
+                    <ul>
+                        <li><a asp-controller="User" asp-action="Profile" class="profile">Profile <img src="~/css/dorothy.jpg"></a></li>
+                        <li><a asp-controller="Home" asp-action="Index">Logout</a></li>
+                    </ul>
                 </li>
+
             </ul>
-        </div>
-        <div class="container">
-            
-            @RenderBody()
-        </div>
-        
+
+
+        </nav>
+    </header>
+
+
+    <div class="container">
+        @RenderBody()
     </div>
-  <script>
-       var hamburger = document.querySelector(".hamburger");
-	hamburger.addEventListener("click", function(){
-		document.querySelector("body").classList.toggle("active");
-	})
-  </script>
-    <script>
-
-        $(document).ready(function () {
-            $("#myTable").DataTable({
-                "scrollY": "430px",
-                "scrollCollapse": true,
-                "columnDefs": [
-                    { "orderable": false, "targets": 'no-sort' }
-                ],
-                "rowReorder": true,
-                "max-width": "100%"
-            });
-
-            $('#myTable" tbody').on('click', '.delete-btn', function () {
-                var itemId = $(this).data('item-id');
-                console.log(itemId);
-                $('#deleteBtn').data('item-id', itemId);
-            });
-            
-
-
-
-        });
-    </script>
-    
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
-    @await RenderSectionAsync("Scripts", required: false)
-    @await Component.InvokeAsync("Notyf")
 </body>
 </html>
+
+

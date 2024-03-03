@@ -4,8 +4,6 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-
-<!DOCTYPE html>
 <html>
 <head>
     <style>
@@ -15,31 +13,47 @@
             background: #ffffff;
             height: 100vh;
             overflow: hidden;
-            font-family: Arial, sans-serif; 
         }
 
-        .center {
+
+        .center table {
+            padding: 0 40px;
+            box-sizing: border-box;
+        }
+
+        .center h2 {
             text-align: center;
-            margin: 2% 10%; 
+            position: absolute;
+            top: 20%;
+            left: 40%;
+            font-weight: bold;
         }
-
-            .center h2 {
-                font-weight: bold;
-            }
 
         .button-container {
-            float: left;
-            margin: 20px 0;
+            display: flex;
+            position: absolute;
+            top: 25%;
+            left: 13%;
         }
 
+            .button-container .btn-spaced {
+                margin-left: 10px;
+            }
+
         .content-table {
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background: #ffffff;
             border-collapse: collapse;
+            margin: 25px 0;
             font-size: 0.9em;
-            width: 100%; 
-            border-radius: 5px;
+            min-width: 1400px;
+            border-radius: 5px 5px 0 0;
             overflow: hidden;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 0 20px rgba(0,0,0,0.15);
+            align-content: center;
         }
 
             .content-table thead tr {
@@ -63,7 +77,7 @@
                 }
 
                 .content-table tbody tr:last-of-type {
-                    border-bottom: 2px solid #009879; 
+                    border-bottom: 2px #009879;
                 }
 
                 .content-table tbody tr .active-row {
@@ -76,13 +90,14 @@
 <body>
 
     <div class="center">
-        <h2> Chronic Conditions</h2>
+
+        <h2><i class='fas fa-city'></i>&nbsp Chronic Conditions</h2>
         <hr>
         <div class="button-container">
             <a asp-action="Create" asp-controller="Condition" class="btn btn-primary"><i class="fas fa-plus"></i>New Condition</a>
+            
         </div>
-        <input type="text" id="searchInput" placeholder="Search...">
-        <table class="table content-table">
+        <table class="content-table">
             <thead>
                 <tr>
                     <th>Condition Name</th>
@@ -91,6 +106,7 @@
                 </tr>
             </thead>
             <tbody>
+
                 @if (Model != null && Model.Any())
                 {
                     @foreach (var condition in Model)
@@ -100,8 +116,9 @@
                             <td>@condition.ConditionDescr</td>
                             <td>
                                 <div class="btn-group btn-group-sm">
-                                    <a asp-action="Edit" asp-controller="Condition" asp-route-id="@condition.ConditionId" class="btn btn-primary">Edit</a>
-                                    
+                                    <a asp-action="Edit" asp-controller="City" asp-route-id="@condition.ConditionId" class="btn btn-primary">Edit</a>
+                                    &nbsp
+                                    <a asp-action="Delete" asp-controller="City" asp-route-id="@condition.ConditionId" class="btn btn-danger">Delete</a>
                                 </div>
                             </td>
                         </tr>
@@ -116,115 +133,10 @@
                         </td>
                     </tr>
                 }
+
             </tbody>
         </table>
-        <div class="pagination">
-            <a href="#" class="prev">&laquo; Previous</a>
-            <span class="page-numbers"></span>
-            <a href="#" class="next">Next &raquo;</a>
-        </div>
     </div>
-    <script>
 
-        document.getElementById("searchInput").addEventListener("input", function () {
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("searchInput");
-            filter = input.value.toUpperCase();
-            table = document.querySelector(".table");
-            tr = table.getElementsByTagName("tr");
-
-            for (i = 1; i < tr.length; i++) {
-                var found = false;
-                var tds = tr[i].getElementsByTagName("td");
-                for (var j = 0; j < tds.length; j++) {
-                    td = tds[j];
-                    if (td) {
-                        txtValue = td.textContent || td.innerText;
-                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                            found = true;
-                            break;
-                        }
-                    }
-                }
-                if (found) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
-            }
-        });
-
-        document.addEventListener('DOMContentLoaded', function () {
-            var pagination = document.querySelector('.pagination');
-            var pageNumbersContainer = pagination.querySelector('.page-numbers');
-            var prevButton = pagination.querySelector('.prev');
-            var nextButton = pagination.querySelector('.next');
-            var tableRows = document.querySelectorAll('.table tbody tr');
-
-            var totalPages = 10;
-
-            var currentPage = 1;
-
-            function updatePageNumbers() {
-                var pageNumbersHTML = '';
-
-                for (var i = 1; i <= totalPages; i++) {
-                    pageNumbersHTML += `<span class="page-number ${i === currentPage ? 'active' : ''}">${i}</span>`;
-                }
-
-                pageNumbersContainer.innerHTML = pageNumbersHTML;
-            }
-
-            function handlePrevButtonClick() {
-                if (currentPage > 1) {
-                    currentPage--;
-                    updatePageNumbers();
-                    updateTableDisplay();
-                }
-            }
-
-            function handleNextButtonClick() {
-                if (currentPage < totalPages) {
-                    currentPage++;
-                    updatePageNumbers();
-                    updateTableDisplay();
-                }
-            }
-
-            prevButton.addEventListener('click', handlePrevButtonClick);
-            nextButton.addEventListener('click', handleNextButtonClick);
-
-            pageNumbersContainer.addEventListener('click', function (event) {
-                if (event.target.classList.contains('page-number')) {
-                    currentPage = parseInt(event.target.textContent);
-                    updatePageNumbers();
-                    updateTableDisplay();
-                }
-            });
-
-            function updateTableDisplay() {
-                for (var i = 0; i < tableRows.length; i++) {
-                    if (i >= (currentPage - 1) * 5 && i < currentPage * 5) {
-                        tableRows[i].style.display = '';
-                    } else {
-                        tableRows[i].style.display = 'none';
-                    }
-                }
-            }
-
-            updatePageNumbers();
-
-            updateTableDisplay();
-        });
-
-
-    </script>
 </body>
 </html>
-
-
-
-
-
-
-

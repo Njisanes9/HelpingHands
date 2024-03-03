@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
 
 namespace HelpingHands.Models
 {
@@ -20,8 +19,5 @@ namespace HelpingHands.Models
 
         [DisplayName("City")]
         public int CityId { get; set; }
-
-        public string? CityName { get; set; }
     }
-   
 }

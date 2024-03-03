@@ -1,153 +1,51 @@
-﻿@inject IHttpContextAccessor contextAccessor;
+﻿<!DOCTYPE html>
 
-
-
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Office Manager</title>
-    <link rel="stylesheet" href="~/css/userstysheet.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-
-
-        .wrapper .sidebar {
-            left: 0;
-            width: 225px;
-            height: 100%;
-        }
-
-
-
-        .parent-li {
-            position: relative;
-        }
-
-        .sub-menu {
-            display: none;
-        }
-
-        .sub-menu {
-            position: absolute;
-            top: 0;
-            left: 100%;
-            background-color: rgb(5, 68, 104);
-            border: 1px solid #ccc;
-            padding: 10px;
-            list-style: none;
-            margin: 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            width: 200px;
-            z-index: 1000;
-        }
-
-        .parent-li:hover .sub-menu,
-        .parent-li:focus-within .sub-menu {
-            display: block;
-        }
-
-    </style>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width-device-with, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/LayoutStyle.css" />
 </head>
 <body>
+    <header>
+        <a href="#" class="logo">
+            <img src="~/css/logo.jpeg">
+            Helping Hands
+        </a>
 
-    <div class="wrapper">
-        <div class="section">
-            <div class="top_navbar">
-                <div class="hamburger">
-                    <a href="#">
-                        <i class="fas fa-bars"></i>
-                    </a>
-                </div>
-            </div>
+        <input type="checkbox" id="menu-bar" />
+        <label for="menu-bar">Menu</label>
 
-        </div>
-        <div class="sidebar">
-            <div class="profile">
-                <img src="~/css/Default.jpg" alt="profile_picture">
-                <h3>@contextAccessor.HttpContext?.Session.GetString("UserName")</h3>
-                <p>@contextAccessor.HttpContext?.Session.GetString("UserTypeDescription")</p>
-            </div>
+        <nav class="navbar">
             <ul>
-               
-                <li>
-                    <a asp-action="OfficeManager" asp-controller="Dashboard">
-                        <span class="icon"><i class="fas fa-desktop"></i></span>
-                        <span class="item">Dashboard</span>
-                    </a>
-                </li>
-                <li class="parent-li">
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-user-friends"></i></span>
-                        <span class="item">People</span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li><a asp-controller="OfficeManager" asp-action="GetAllPatient">View Patients</a></li>
-                        <li><a asp-controller="OfficeManager" asp-action="GetAllNurses">View Nurses</a></li>
-                    </ul>
-                </li>
-                <li class="parent-li">
-                    <a href="#">
-                        <span class="icon"><i class='fas fa-file-contract'></i></span>
-                        <span class="item">Contracts</span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li><a asp-controller="OfficeManager" asp-action="GetNewContracts">New Contracts</a></li>
-                        <li><a asp-controller="OfficeManager" asp-action="GetCareContracts">Care Contracts</a></li>                       
-                        <li><a asp-controller="OfficeManager" asp-action="GetAllContracts">All Contracts</a></li>
-
-                    </ul>
-                </li>
-                <li class="parent-li">
-                    <a href="#">
-                        <span class="icon"><i class='fas fa-file-contract'></i></span>
-                        <span class="item">Reports</span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li><a asp-controller="OfficeManager" asp-action="GetContractCareVisits">Contracts</a></li>
-                        <li><a asp-controller="OfficeManager" asp-action="GetAllNurses">Nurses</a></li>
-
-
-                    </ul>
-                </li>
+                <li><a><i class="fa-solid fa-gauge"></i>Dashboard</a></li>
+                <li><a id="about"><i class="fa-solid fa-file-contract"></i>Nurses</a></li>
+                <li><a id="contact">Cities</a></li>
+                <li><a id="services">Contracts</a></li>
 
                 <li>
-                    <a asp-controller="User" asp-action="Login">
-                        <span class="icon"><i class="fa fa-arrow-circle-o-left"></i></span>
-                        <span class="item">Logout</span>
-                    </a>
+                    <a>User Account +</a>
+                    <ul>
+                        <li><a asp-controller="User" asp-action="Profile" class="profile">Profile <img src="~/css/dorothy.jpg"></a></li>
+                        <li><a asp-controller="Home" asp-action="Index">Logout</a></li>
+                    </ul>
                 </li>
+
             </ul>
-        </div>
-        <div class="container">
 
-            @RenderBody()
-        </div>
 
+        </nav>
+    </header>
+
+
+    <div class="container">
+        @RenderBody()
     </div>
-    <script>
-
-        $(document).ready(function () {
-            $('.parent-li').click(function () {
-                $(this).find('.sub-menu').toggle();
-            });
-        });
-
-
-        var hamburger = document.querySelector(".hamburger");
-        hamburger.addEventListener("click", function () {
-            document.querySelector("body").classList.toggle("active");
-        })
-    </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-    @await Component.InvokeAsync("Notyf")
 </body>
 </html>
+
 
 

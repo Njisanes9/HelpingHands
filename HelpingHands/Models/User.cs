@@ -19,14 +19,14 @@ namespace HelpingHands.Models
         [DisplayName("Email")]
         [StringLength(100)]
         [DataType(DataType.EmailAddress)]
-        [RegularExpression(@"^\S+@\S+\.\S+$", ErrorMessage = "Please enter a valid email address")]
-                
+        [RegularExpression(@"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z",
+                           ErrorMessage = "Please enter a valid email address")]
         public string Email { get; set; }
 
 
         [Required(ErrorMessage = "Please provide a password!")]
         [DisplayName("Password")]
-        [StringLength(15, ErrorMessage = "Password \"{0}\" must have {2} character", MinimumLength = 8)]
+        [StringLength(50, ErrorMessage = "Password \"{0}\" must have {2} character", MinimumLength = 8)]
         [DataType(DataType.Password)]
         [RegularExpression(@"^([a-zA-Z0-9@*#]{8,15})$", ErrorMessage = "Password must contain: Minimum 8 characters atleast 1 UpperCase Alphabet, 1 LowerCase " +
             "Alphabet, 1 Number and 1 Special Character")]
@@ -43,11 +43,10 @@ namespace HelpingHands.Models
         [DisplayName("User Type")]
         public int UserTypeId { get; set; }
 
-		public string? UserTypeDescription { get; set; }
-
-		[DisplayName("Status")]
+        
+        [DisplayName("Status")]
         [StringLength(50)]
-        public string? Status { get; set; }
+        public string Status { get; set; }
 
     }
    

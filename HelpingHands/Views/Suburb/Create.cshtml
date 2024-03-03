@@ -4,121 +4,100 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+<!DOCTYPE html>
+<html lang="en">
 
-<style>
-    .required::after {
-        content: " *";
-        color: red;
-        font-size: 20px;
-    }
-    .card {
-        border: none
-    }
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
 
 
-    .user-details h4 {
-        color: blue
-    }
+    <title>Manage Suburbs</title>
 
-    .ratings {
-        font-size: 30px;
-        font-weight: 600;
-        display: flex;
-        justify-content: left;
-        align-items: center;
-        color: #f9b43a
-    }
 
-    .user-details span {
-        text-align: left
-    }
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-    .inputs label {
-        display: flex;
-        margin-left: 3px;
-        font-weight: 500;
-        font-size: 13px;
-        margin-bottom: 4px
-    }
 
-    .inputs input {
-        font-size: 14px;
-        height: 40px;
-        border: 2px solid #ced4da
-    }
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
 
-        .inputs input:focus {
-            box-shadow: none;
-            border: 2px solid blue
+
+    <link href="~/css/webform.css" rel="stylesheet" media="all">
+    <style>
+        .label::after {
+            content: " *";
+            color: red;
+            font-size: 20px;
         }
+    </style>
+</head>
 
-    .about-inputs label {
-        display: flex;
-        margin-left: 3px;
-        font-weight: 500;
-        font-size: 13px;
-        margin-bottom: 4px
-    }
+<body>
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+       <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title">Add New Suburb</h2>
+                    <form method="post" enctype="multipart/form-data" action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label" asp-for="SuburbName"></label>
+                                    <input class="input--style-4" asp-for="SuburbName" type="text" required/>
+                                    <span asp-validation-for="SuburbName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label" asp-for="PostalCode"></label>
+                                    <input class="input--style-4" asp-for="PostalCode" type="text" required >
+                                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label class="label" asp-for="CityId"></label>
+                            <div class="rs-select2 js-select-simple select--no-search">
+                            </div>
+                            <select asp-for="CityId" class="form-control" asp-items="ViewBag.CityList">
+                                
+                                    <option disabled="disabled" selected="selected">--Select City--</option>
+                                    
+                                
+                                
+                            </select>
+                        </div>
+                        
 
-    .about-inputs textarea {
-        font-size: 14px;
-        height: 100px;
-        border: 2px solid #ced4da;
-        resize: none
-    }
-
-        .about-inputs textarea:focus {
-            box-shadow: none
-        }
-
-    .btn {
-        font-weight: 600
-    }
-
-        .btn:focus {
-            box-shadow: none
-        }
-</style>
-<div class="container mt-3">
-    <div class="card p-3 text-center">
-
-        <h4>Manage Suburbs</h4>
-        <form method="post">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="inputs">
-                        <label asp-for="SuburbName" class="required"></label>
-                        <input asp-for="SuburbName" class="form-control" type="text" placeholder="Surname">
-                        <span asp-validation-for="SuburbName" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="inputs">
-                        <label asp-for="PostalCode" class="required"></label>
-                        <input asp-for="PostalCode" class="form-control" type="text" placeholder="First Name">
-                        <span asp-validation-for="PostalCode" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="inputs">
-                        <label asp-for="CityId" class="required"></label>
-                        <select asp-for="CityId" class="form-control" asp-items="ViewBag.CityList">
-                            <option disabled selected>--Select City--</option>
-                            
-                        </select>
-                        <span asp-validation-for="CityId" class="text-danger"></span>
-
-                    </div>
-                </div>
-
+                        <div class="p-t-15">
+                            <input class="btn btn--radius-2 btn--blue" type="submit" value="Submit"/>
+                        </div>
+                    </form>
+               </div>
             </div>
-            
-            <div class="mt-3 gap-2 d-flex justify-content-end">
-                <button class="px-3 btn btn-sm btn-outline-primary">Cancel</button>
-                <button class="px-3 btn btn-sm btn-primary" type="submit">Save</button>
-            </div>
-        </form>
-    </div>
-</div>
+       </div>
+   </div>
+   
 
+    <!-- Jquery JS-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <script src="vendor/datepicker/moment.min.js"></script>
+    <script src="vendor/datepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="js/global.js"></script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
 
